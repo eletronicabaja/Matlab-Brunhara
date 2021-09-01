@@ -1,7 +1,7 @@
 clear; clc; close all;
 
 %===|ARQUIVO A SER CARREGADO|===%
-fid = fopen('C:\Users\SOPA_\Desktop\file003.txt');
+fid = fopen('D:\Baja\Eletronica\2020\Dados-de-Testes\Teste-de-AV\2021-08-31\setup5.txt');
 
 %===|Converte os dados do arquivo em Variaveis|===%
 d = textscan(fid,'%s');
@@ -30,6 +30,7 @@ tempObj = movmean(tempObj,1);
 %===|Plota os Gráficos de Dados|===%
 figure('Name','Run');
 hold on;
+grid on;
 plot(rot,'Color',[1,0,0]);
 plot(vel,'Color',[0,0,1]);
 plot(anlg0,'Color',[0,1,0]);
@@ -39,11 +40,21 @@ plot(tempObj,'Color',[1,0,0.5]);
 hold off;
 
 %===|DEFINE POSIÇÃO DO INICIO E FIM DO TESTE|===%
-inicio = 1000;
-fim = 1400;
+inicio = 8053;
+fim = 8516;
 
 %===|Plota o Gráfico de Rot x Vel|===%
 figure('Name','Rot x Vel');
 hold on;
-plot(vel(inicio:fim)./100, rot(inicio:fim),'Color',[1,0,0]);
+grid on;
+plot(vel(inicio:fim)./100, rot(inicio:fim),'Color',[0,1,0]);
+hold off;
+
+figure('Name','Rot & Vel');
+hold on;
+grid on;
+yyaxis left;
+plot(rot(inicio:fim),'Color',[1,0,0]);
+yyaxis right;
+plot(vel(inicio:fim)./100,'Color',[0,0,1]);
 hold off;
