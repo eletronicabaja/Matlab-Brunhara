@@ -1,8 +1,8 @@
-clear; clc; %close all;
+clear; clc; close all;
 
 %===|ARQUIVO A SER CARREGADO|===%
-fid = fopen('D:\Baja\Eletronica\2020\Dados-de-Testes\Teste-de-AV\2021-10-06\setup1b.txt');
-setupn = 1; %numero do setup
+fid = fopen('D:\Baja\Eletronica\2020\Dados-de-Testes\Teste-de-AV\2021-11-10\setup9c.txt');
+setupn = 0; %numero do setup
 
 %===|Converte os dados do arquivo em Variaveis|===%
 d = textscan(fid,'%s');
@@ -10,39 +10,37 @@ data = cat(1,d{:});
 dataexpand = cellfun(@num2cell,data,'UniformOutput',false);
 alldata = cat(1,dataexpand{:});
 
+counter = str2double(string(cell2mat(alldata(:,17:22))));
 rot = str2double(string(cell2mat(alldata(:,1:4))));
 vel = str2double(string(cell2mat(alldata(:,5:8))));
-anlg0 = str2double(string(cell2mat(alldata(:,9:12))));
-Tobj = str2double(string(cell2mat(alldata(:,13:16))));
-dts = str2double(string(cell2mat(alldata(:,17:20))));
-counter = str2double(string(cell2mat(alldata(:,21:24))));
+fuel = str2double(string(cell2mat(alldata(:,9:12))));
+bateria = str2double(string(cell2mat(alldata(:,13:16))));
+temporizador = str2double(string(cell2mat(alldata(:,17:22))));
 %=================================================%
 
-
 %===|Aplica Média Movel nos dados|===%
-rot = movmean(rot,16);
-vel = movmean(vel,8);
-anlg0 = movmean(anlg0,1);
-Tobj = movmean(Tobj,1);
-dts = movmean(dts,1);
 counter = movmean(counter,1);
-
+rot = movmean(rot,16);
+vel = movmean(vel,16);
+fuel = movmean(fuel,1000);
+bateria = movmean(bateria,1);
+temporizador = movmean(temporizador./10,1);
 
 %===|Plota os Gráficos de Dados|===%
 figure('Name','Run');
 hold on;
 grid on;
+plot(counter,'Color',[0,0,0]);
 plot(rot,'Color',[1,0,0]);
 plot(vel,'Color',[0,0,1]);
-plot(anlg0,'Color',[0,1,0]);
-plot(Tobj,'Color',[0,0.5,0]);
-plot(dts,'Color',[1,0,1]);
-plot(counter,'Color',[0,0,0]);
+plot(fuel,'Color',[0,1,0]);
+plot(bateria,'Color',[0,0.5,0]);
+plot(temporizador,'Color',[1,0,1]);
 hold off;
 
 %% ===|DEFINE POSIÇÃO DO INICIO E FIM DO TESTE|===%
-inicio = 19930;
-fim = 20330;
+inicio = 11200;
+fim = 11520;
 
 %===|Plota o Gráfico de Rot x Vel|===%
 figure('Name','Rotação x Velocidade');
@@ -80,3 +78,4 @@ legend('Dados', '3.7','2.9','1.9','1.05');
 ylim([2200 4400])
 xlim([0 50])
 title(sprintf('%s - Setup %d', hoje, setupn))
+hold off

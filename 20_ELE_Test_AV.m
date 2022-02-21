@@ -1,8 +1,8 @@
-clear; clc; %close all;
+clear; clc; close all;
 
 %===|ARQUIVO A SER CARREGADO|===%
-fid = fopen('D:\Baja\Eletronica\2020\Dados-de-Testes\Teste-de-AV\2021-10-06\setup1b.txt');
-setupn = 1; %numero do setup
+fid = fopen('D:\Baja\Eletronica\2020\Dados-de-Testes\Teste-de-AV\2021-09-15\setup2.txt');
+setupn = 2; %numero do setup
 
 %===|Converte os dados do arquivo em Variaveis|===%
 d = textscan(fid,'%s');
@@ -10,12 +10,12 @@ data = cat(1,d{:});
 dataexpand = cellfun(@num2cell,data,'UniformOutput',false);
 alldata = cat(1,dataexpand{:});
 
-rot = str2double(string(cell2mat(alldata(:,1:4))));
-vel = str2double(string(cell2mat(alldata(:,5:8))));
-anlg0 = str2double(string(cell2mat(alldata(:,9:12))));
-Tobj = str2double(string(cell2mat(alldata(:,13:16))));
-dts = str2double(string(cell2mat(alldata(:,17:20))));
-counter = str2double(string(cell2mat(alldata(:,21:24))));
+rot = str2double(string(cell2mat(alldata(:,5:8))));
+vel = str2double(string(cell2mat(alldata(:,9:12))));
+var0 = str2double(string(cell2mat(alldata(:,9:12))));
+var1 = str2double(string(cell2mat(alldata(:,13:16))));
+var2 = str2double(string(cell2mat(alldata(:,17:20))));
+counter = str2double(string(cell2mat(alldata(:,1:4))));
 %=================================================%
 
 
@@ -41,8 +41,8 @@ plot(counter,'Color',[0,0,0]);
 hold off;
 
 %% ===|DEFINE POSIÇÃO DO INICIO E FIM DO TESTE|===%
-inicio = 19930;
-fim = 20330;
+inicio = 12380;
+fim = 13000;
 
 %===|Plota o Gráfico de Rot x Vel|===%
 figure('Name','Rotação x Velocidade');
