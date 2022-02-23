@@ -1,7 +1,7 @@
 clear; clc; close all;
 
 %===|ARQUIVO A SER CARREGADO|===%
-fid = fopen('D:\Baja\Eletronica\22\Dados\Dinamometro\2022_02_23\setup2_failed.txt');
+fid = fopen('D:\Baja\Eletronica\22\Dados\Dinamometro\2022_02_23\setup2.txt');
 setupn = 0; %numero do setup
 
 %===|Converte os dados do arquivo em Variaveis|===%
@@ -22,10 +22,10 @@ force = smoothdata(force,'gaussian',2000);
 
 %===|Variaveis de pro calculo|===%
 braco = 0.635; %mm
-Patm = 1016; %mBar
-Tatm = 26; %Celcius
+Patm = 1017; %mBar
+Tatm = 27; %Celcius
 
-%===|Fatores Calculo de Toruqe Potencia|===%
+%===|Fatores Calculo de Torque e Potencia|===%
 torque = force * braco;
 powerKW = torque .* rpm ./ 60000.0;
 powerHP = powerKW ./ 0.745699872;
@@ -41,8 +41,8 @@ plot(powerHP*10,'color',[1,0,0.5]);
 plot(powerKW*10,'color',[1,0,1]);
 hold off;
 
-xi = 3600;
-xf = 18000;
+xi = 6300;
+xf = 21500;
 
 figure ('Name','Resultado');
 subplot(2,1,1);
