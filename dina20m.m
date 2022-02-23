@@ -1,7 +1,7 @@
 clear; clc; close all;
 
 %===|ARQUIVO A SER CARREGADO|===%
-fid = fopen('D:\Baja\Eletronica\2020\Dados-de-Testes\Dina\1passagemboa.txt');
+fid = fopen('D:\Baja\Eletronica\22\Dados\Dinamometro\2022_02_23\setup1.txt');
 setupn = 0; %numero do setup
 
 %===|Converte os dados do arquivo em Variaveis|===%
@@ -16,10 +16,10 @@ counter = str2double(string(cell2mat(alldata(:,9:12))));
 
 %===|Aplica Média Movel nos dados|===%
 counter = movmean(counter,1);
-rpm = smoothdata(rpm,'gaussian',100);
-force = smoothdata(force,'gaussian',200);
+rpm = smoothdata(rpm,'gaussian',200);
+force = smoothdata(force,'gaussian',2000);
 
-braco = 0.810;
+braco = 0.635;
 
 torque = force * braco;
 powerKW = torque .* rpm ./ 60000.0;
@@ -35,14 +35,14 @@ plot(powerHP*100,'color',[1,0,0.5]);
 plot(powerKW,'color',[1,0,1]);
 hold off;
 
-xi = 6700;
-xf = 16000;
+xi = 1391;
+xf = 10650;
 figure ('Name','Resultado');
 hold on;
 grid on;
 yyaxis left;
-plot(rpm(xi:xf),torque(xi:xf),'color',[0,0,1],'linewidth',1);
+plot(rpm(xi:xf),torque(xi:xf)./9.8,'color',[0,0,1],'linewidth',1);
 yyaxis right;
 plot(rpm(xi:xf), powerHP(xi:xf),'color',[1,0,0],'linewidth',1);
-legend('Torque (NM)','Potência (HP)','Location','northwest')
+legend('Torque (KgFm)','Potência (HP)','Location','northwest')
 hold off;
