@@ -1,7 +1,7 @@
 clear; clc; close all;
 
 %===|ARQUIVO A SER CARREGADO|===%
-fid = fopen('D:\Baja\Eletronica\22\Dados\Dinamometro\2022_02_23\setup2.txt');
+fid = fopen('D:\Baja\Eletronica\22\Dados\Dinamometro\2022_02_23\setup3.txt');
 setupn = 0; %numero do setup
 
 %===|Converte os dados do arquivo em Variaveis|===%
@@ -16,8 +16,8 @@ counter = str2double(string(cell2mat(alldata(:,9:12))));
 
 %===|Aplica Média Movel nos dados|===%
 counter = movmean(counter,1);
-rpm = smoothdata(rpm,'gaussian',200);
-force = smoothdata(force,'gaussian',2000);
+rpm = smoothdata(rpm,'gaussian',1500);
+force = smoothdata(force,'gaussian',1500);
 
 
 %===|Variaveis de pro calculo|===%
@@ -35,14 +35,16 @@ figure ('Name','Dado x Tempo');
 %plot(counter,'color',[0,0,0]);
 hold on;
 plot(rpm,'color',[1,0,0]);
+%plot(smoothdata(rpm,'gaussian',1500),'color',[0.5,0,0]);
 plot(force*10,'color',[0,1,0]);
+%plot(smoothdata(force,'gaussian',1500)*10,'color',[0,0.5,0]);
 plot(torque*10,'color',[0,0,1]);
 plot(powerHP*10,'color',[1,0,0.5]);
 plot(powerKW*10,'color',[1,0,1]);
 hold off;
 
-xi = 6300;
-xf = 21500;
+xi = 300;
+xf = 15900;
 
 figure ('Name','Resultado');
 subplot(2,1,1);
