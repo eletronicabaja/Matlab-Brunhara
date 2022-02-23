@@ -52,7 +52,7 @@ yyaxis left;
 plot(rpm(xi:xf),torque(xi:xf)./9.8,'color',[0,0,1],'linewidth',1);
 yyaxis right;
 plot(rpm(xi:xf), powerHP(xi:xf),'color',[1,0,0],'linewidth',1);
-title('Potência e Torque');
+title('Potencia e Torque');
 legend('Torque (KgFm)','Potência (HP)','Location','northwest')
 hold off;
 
@@ -63,6 +63,7 @@ yyaxis left;
 plot(rpm(xi:xf),torque(xi:xf)./9.8 *coef,'color',[0,0,1],'linewidth',1);
 yyaxis right;
 plot(rpm(xi:xf), powerHP(xi:xf) *coef,'color',[1,0,0],'linewidth',1);
-title('Potência e Torque com Correcção Atmosférica');
+title('Potencia e Torque com Correcção Atmosférica'...
+        'f');
 legend('Torque (KgFm)','Potência (HP)','Location','northwest')
 hold off;
