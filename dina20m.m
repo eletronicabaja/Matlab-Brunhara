@@ -1,7 +1,7 @@
 clear; clc; close all;
 
 %===|ARQUIVO A SER CARREGADO|===%
-fid = fopen('D:\Baja\Eletronica\22\Dados\Dinamometro\2022_02_23\setup3.txt');
+fid = fopen('D:\Baja\Eletronica\22\Dados\Dinamometro\2022_02_23\setup4.txt');
 setupn = 0; %numero do setup
 
 %===|Converte os dados do arquivo em Variaveis|===%
@@ -34,6 +34,7 @@ coef = 1.18 * ((990 / Patm) * ((273 + Tatm) / 298) ^ 0.5) - 0.18;
 figure ('Name','Dado x Tempo');
 %plot(counter,'color',[0,0,0]);
 hold on;
+grid on;
 plot(rpm,'color',[1,0,0]);
 %plot(smoothdata(rpm,'gaussian',1500),'color',[0.5,0,0]);
 plot(force*10,'color',[0,1,0]);
@@ -43,8 +44,8 @@ plot(powerHP*10,'color',[1,0,0.5]);
 plot(powerKW*10,'color',[1,0,1]);
 hold off;
 
-xi = 300;
-xf = 15900;
+xi = 2300;
+xf = 12100;
 
 figure ('Name','Resultado');
 subplot(2,1,1);
