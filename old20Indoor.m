@@ -78,12 +78,12 @@ surface([long(inicio:fim), long(inicio:fim)],...
         'facecolor','none','edgecolor','interp',...
         'linewidth',3);   
 map = [
-    39/255 39/255 61/255
-    255/255 200/255 11/255
-    255/255 200/255 11/255
+    24/255 94/255 246/255
+    255/255 0/255 0/255
+    255/255 0/255 0/255
     ];
 colormap(map);
-colorbar;
+%colorbar;
 title('\fontsize{32}Pontos de Frenagem em Pista');
 hold off;
 
