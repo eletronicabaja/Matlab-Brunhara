@@ -1,7 +1,7 @@
 clear; clc; close all;
 
 %===|ARQUIVO A SER CARREGADO|===%
-fid = fopen('D:\Baja\Eletronica\2020\Dados-de-Testes\Susp\Frequencia Natural e Curso de Suspensão\setup9_curva.txt');
+fid = fopen('D:\Baja\Eletronica\2020\Dados-de-Testes\Susp\Frequencia Natural e Curso de Suspensão\setup1_curva.txt');
 
 %===|Converte os dados do arquivo em Variaveis|===%
 d = textscan(fid,'%s');
@@ -69,6 +69,7 @@ plot(anlg.b);
 legend('Counter', 'RPM', 'Velocidade', 'Acel X', 'Acel y', 'Acel Z', 'Gyro X', 'Gyro Y', 'Gyro Z', 'Anlg A', 'Anlg B', 'Location','northwest');
 hold off;
 
+%% 
 %===|Plota os Gráficos de Dados Separados|===%
 figure('Name','Data Boxes');
 subplot(2,2,1);
@@ -123,4 +124,34 @@ plot( (1:length(accel.z)) .* 12.5 ./1000, accel.z, 'Color',[0.7,0.7,0]);
 ylabel('m/s²');
 xlabel('segundos');
 title('Aceleração na Cabeça do Piloto');
+hold off;
+
+%% 
+inicio  = 3881;
+fim     = 4723;
+
+figure('Name', 'Validação da Suspensão');
+subplot(2,2,2);
+hold on;
+grid on;
+plot(accel.x(inicio:fim));
+plot(accel.y(inicio:fim));
+plot(accel.z(inicio:fim));
+ylabel('m/s²');
+yyaxis right;
+plot(gyro.x(inicio:fim), 'LineStyle', ':');
+plot(gyro.y(inicio:fim), 'LineStyle', ':');
+plot(gyro.z(inicio:fim), 'LineStyle', ':');
+ylabel('°/s');
+title('Acelerometro & Giroscópio');
+legend('Acel X', 'Acel Y', 'Acel Z', 'Gyro X', 'Gyro Y', 'Gyro Z', 'Location','northwest');
+hold off;
+
+subplot(2,2,4);
+hold on;
+grid on;
+plot(susp.a(inicio:fim));
+plot(susp.b(inicio:fim));
+title('Curso de Suspensão');
+legend('Traseira', 'Dianteira', 'Location', 'northwest');
 hold off;

@@ -1,7 +1,7 @@
 clear; clc; close all;
 
 %===|ARQUIVO A SER CARREGADO|===%
-fid = fopen('D:\Baja\Eletronica\22\Dados\AV\2022_03_03\setup4.txt');
+fid = fopen('D:\Baja\Eletronica\2020\Dados-de-Testes\Teste-de-AV\2021-10-06\setup1.txt');
 setupn = 0; %numero do setup
 
 %===|Converte os dados do arquivo em Variaveis|===%
@@ -10,7 +10,7 @@ data = cat(1,d{:});
 dataexpand = cellfun(@num2cell,data,'UniformOutput',false);
 alldata = cat(1,dataexpand{:});
 
-counter = str2double(string(cell2mat(alldata(:,9:12))));
+counter = str2double(string(cell2mat(alldata(:,1:12))));
 rot = str2double(string(cell2mat(alldata(:,1:4))));
 vel = str2double(string(cell2mat(alldata(:,5:8))));
 %fuel = str2double(string(cell2mat(alldata(:,9:12))));
@@ -39,8 +39,8 @@ plot(vel,'Color',[0,0,1]);
 hold off;
 
 %% ===|DEFINE POSIÇÃO DO INICIO E FIM DO TESTE|===%
-inicio = 17235;
-fim = 18132;
+inicio = 17886;
+fim = 18297;
 
 %===|Plota o Gráfico de Rot x Vel|===%
 figure('Name','Rotação x Velocidade');
